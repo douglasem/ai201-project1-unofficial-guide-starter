@@ -1,6 +1,3 @@
-SOURCE: UF Locations
-URL: https://dineoncampus.com/uf/hours-of-operation
-
 Week of June 14th, 2026
 
 Hours may be subject to change.
@@ -8,21 +5,7 @@ Hours may be subject to change.
 Type to search. Results will update automatically as you type.Search locations
 Search locations...
 Reitz Union
-Go to previous weekGo to next week
-Sun
-14
-Mon
-15
-Tue
-16
-Wed
-17
-Thu
-18
-Fri
-19
-Sat
-20
+
 Hours of operation for Reitz Union for week of June 14, 2026
 Location	Sun 14	Mon 15	Tue 16	Wed 17	Thu 18	Fri 19	Sat 20
 Sonic @ Reitz Union 

@@ -22,11 +22,11 @@ My domain is an unofficial student guide to eating at the University of Florida 
 
 | # | Source | Description | URL or location |
 |---|--------|-------------|-----------------|
-| 1 | UF Business Services Dining | Official overview of UF dining and meal plans | https://businessservices.ufl.edu/services/dining/ |
-| 2 | Florida Fresh Dining | Official dining portal with locations and meal plan information | https://dineoncampus.com/uf/ |
-| 3 | UF Hours of Operation | Official current dining hours and open locations | https://dineoncampus.com/uf/hours-of-operation |
+| 1 | Florida Fresh Dining: Who We Are | Official dining portal with background on dining services and mission | https://new.dineoncampus.com/UF/who-we-are |
+| 2 | Florida Fresh Dining: Hours of Operation | Official dining portal with location and hours | https://dineoncampus.com/uf/hours-of-operation |
+| 3 | Navigating the Swamp: A Gator's Guide to UF Meal Plans | Unoffical guide to UF meal plans | Unoffical student guide to UF's meal plan options | https://prked.com/post/navigating-the-swamp-a-gators-guide-to-uf-meal-plans |
 | 4 | UF Declining Balance | Official explanation/contact page for declining balance dining funds | https://businessservices.ufl.edu/services/dining/declining-balance/ |
-| 5 | Reitz Union Dining & Retail | Official Reitz Union dining/retail overview | https://union.ufl.edu/visit/dining-retail/ |
+| 5 | Florida Fresh Dining: FAQ | Frequently asked questions regarding dining and meal plans | https://new.dineoncampus.com/UF/faq |
 | 6 | Reddit: Best meal plan for freshman? | Student discussion of whether freshman meal plans are worth it | https://www.reddit.com/r/ufl/comments/1b5y8qy/best_meal_plan_for_freshman/ |
 | 7 | Reddit: UF on campus food tier list | Student opinions ranking campus food options | https://www.reddit.com/r/ufl/comments/xqubez/uf_on_campus_food_tier_list/ |
 | 8 | Reddit: Meal plans Freshman Fall 2025 | Student discussion of price, quality, and convenience of meal plans | https://www.reddit.com/r/ufl/comments/1l77ghc/meal_plans_freshman_fall_2025/ |
@@ -48,6 +48,9 @@ Approximately 100 characters of overlap between adjacent chunks
 
 **Reasoning:**
 The sources include a mix of official dining descriptions and short student opinions. Student comments are often compact and full of opinions, while the official pages contain more structured information (meal plan descriptions, hours, and locations). A 500-character chunk is small enough to keep one idea focused, such as meal plan recommendations or a complaint, but large enough to preserve context. The 100-character overlap helps prevent useful details from being split across chunk boundaries, especially when a student comment explains both a recommendation and the reason for it.
+
+**Note for later milestones (noise in chunks):**
+The Milestone 3 ingestion currently keeps the `SOURCE:` / `URL:` header lines at the top of each file and some Reddit UI artifacts in the comment threads (e.g. `Upvote`, `Downvote`, `Reply`, usernames, and timestamps like `4y ago`). This is acceptable for ingestion, but before embedding (Milestone 4) I should evaluate whether to strip these artifacts during text cleaning, since they add no dining-related meaning and may slightly dilute retrieval quality. I will inspect sample chunks first and decide whether the added cleaning is worth it.
 ---
 
 ## Retrieval Approach
