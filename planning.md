@@ -11,7 +11,7 @@
 
 <!-- What domain did you choose? Why is this knowledge valuable and hard to find through official channels? -->
 
-My domain is an unofficial student guide to eating at the University of Florida (which I attebded for undergrad). This knowledge is valuable because official UF dining pages explain locations, hours, and meal plan options, but they do not  answer practical student questions like whether meal plans are worth it, which locations students like, where students complain about the quality of the food, and what options seem convenient or healthy in daily life. Student-generated discussions are scattered across Reddit threads, so a RAG system makes that informal knowledge easier to search.
+My domain is an unofficial student guide to eating at the University of Florida (which is the school I attended for undergrad). This knowledge is valuable because official UF dining pages explain locations, hours, and meal plan options, but they do not  answer practical student questions like whether meal plans are worth it, which locations students like, where students complain about the quality of the food, and what options seem convenient or healthy in daily life. Student-generated discussions are scattered across Reddit threads, so a RAG system makes that informal knowledge easier to search.
 
 ---
 
@@ -24,7 +24,7 @@ My domain is an unofficial student guide to eating at the University of Florida 
 |---|--------|-------------|-----------------|
 | 1 | Florida Fresh Dining: Who We Are | Official dining portal with background on dining services and mission | https://new.dineoncampus.com/UF/who-we-are |
 | 2 | Florida Fresh Dining: Hours of Operation | Official dining portal with location and hours | https://dineoncampus.com/uf/hours-of-operation |
-| 3 | Navigating the Swamp: A Gator's Guide to UF Meal Plans | Unoffical guide to UF meal plans | Unoffical student guide to UF's meal plan options | https://prked.com/post/navigating-the-swamp-a-gators-guide-to-uf-meal-plans |
+| 3 | Navigating the Swamp: A Gator's Guide to UF Meal Plans | Unofficial student guide to UF's meal plan options | https://prked.com/post/navigating-the-swamp-a-gators-guide-to-uf-meal-plans |
 | 4 | UF Declining Balance | Official explanation/contact page for declining balance dining funds | https://businessservices.ufl.edu/services/dining/declining-balance/ |
 | 5 | Florida Fresh Dining: FAQ | Frequently asked questions regarding dining and meal plans | https://new.dineoncampus.com/UF/faq |
 | 6 | Reddit: Best meal plan for freshman? | Student discussion of whether freshman meal plans are worth it | https://www.reddit.com/r/ufl/comments/1b5y8qy/best_meal_plan_for_freshman/ |
@@ -50,8 +50,10 @@ Approximately 100 characters of overlap between adjacent chunks
 The sources include a mix of official dining descriptions and short student opinions. Student comments are often compact and full of opinions, while the official pages contain more structured information (meal plan descriptions, hours, and locations). A 500-character chunk is small enough to keep one idea focused, such as meal plan recommendations or a complaint, but large enough to preserve context. The 100-character overlap helps prevent useful details from being split across chunk boundaries, especially when a student comment explains both a recommendation and the reason for it.
 
 **Note for later milestones (noise in chunks):**
-The Milestone 3 ingestion currently keeps the `SOURCE:` / `URL:` header lines at the top of each file and some Reddit UI artifacts in the comment threads (e.g. `Upvote`, `Downvote`, `Reply`, usernames, and timestamps like `4y ago`). This is acceptable for ingestion, but before embedding (Milestone 4) I should evaluate whether to strip these artifacts during text cleaning, since they add no dining-related meaning and may slightly dilute retrieval quality. I will inspect sample chunks first and decide whether the added cleaning is worth it.
----
+The Milestone 3 ingestion keeps some Reddit UI artifacts in the comment threads (e.g. usernames and timestamps like `4y ago`). This is acceptable for ingestion, but before embedding (Milestone 4) I should evaluate whether to strip these artifacts during text cleaning, since they add no dining-related meaning and may slightly dilute retrieval quality. I will inspect sample chunks first and decide whether the added cleaning is worth it.
+
+**Implementation update:**
+I evaluated Reddit UI artifacts before embedding. I removed Upvote, Downvote, Reply, Share, and standalone vote counts because they added no dining-related meaning. I kept usernames and timestamps (e.g., "4y ago") as lightweight context.
 
 ## Retrieval Approach
 
@@ -110,24 +112,24 @@ For this project, all-MiniLM-L6-v2 is a good choice because it runs locally, is 
 
 Raw Documents
 (.txt files in /documents)
-     \/
+     ↓
 Document Ingestion
 (Python file reading + basic text cleaning)
-     \/
+     ↓
 Chunking
 (custom chunk_text function, 500 chars, 100 char overlap)
-     \/
+     ↓
 Embedding + Vector Store
 (sentence-transformers all-MiniLM-L6-v2 + ChromaDB)
-     \/
+     ↓
 Retrieval
 (top-5 semantic search results with source metadata)
-     \/
+     ↓
 Generation
 (Groq llama-3.3-70b-versatile, grounded prompt)
-     \/
+     ↓
 Query Interface
-     \/
+     ↓
 (Gradio web UI)
 
 ---
